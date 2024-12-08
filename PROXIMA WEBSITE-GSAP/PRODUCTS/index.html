@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categories</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
+main {
+  width: 90%; /* Smaller width, with padding around the edges */
+  max-width: 1200px; /* Ensure it doesn't grow too large on wide screens */
+  margin: 0 auto;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.category img {
+  width: 100%;
+  height: 300px; /* Larger image height */
+  object-fit: cover;
+}
+
+.category {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.category:hover {
+  transform: scale(1.03);
+}
+
+.category h2 {
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+
+.category p {
+  font-size: 0.9rem;
+  color: #ff5722;
+  margin: 0 0.5rem 1rem 0.5rem;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+  </header>
+  <main>
+    <section class="categories">
+      <div class="category" onclick="openCategory('aerial')">
+        <img src="/1.jpg" alt="Aerial Work Platforms">
+        <h2>Aerial Work Platforms</h2>
+        <p>Core Solutions</p>
+      </div>
+      <div class="category" onclick="openCategory('earthmoving')">
+        <img src="/2.jpg" alt="Earthmoving">
+        <h2>Earthmoving</h2>
+        <p>Core Solutions</p>
+      </div>
+      <div class="category" onclick="openCategory('material-handling')">
+        <img src="images/material-handling.jpg" alt="Material Handling">
+        <h2>Material Handling</h2>
+        <p>Core Solutions</p>
+      </div>
+      <div class="category" onclick="openCategory('power')">
+        <img src="/3.jpg" alt="Power Solutions">
+        <h2>Power Solutions</h2>
+        <p>Core Solutions</p>
+      </div>
+      <div class="category" onclick="openCategory('compaction')">
+        <img src="/4.jpg" alt="Compaction">
+        <h2>Compaction</h2>
+        <p>Core Solutions</p>
+      </div>
+    </section>
+    
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

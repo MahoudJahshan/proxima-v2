@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category Details</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .category-title {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #ff5722;
+}
+
+.equipment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.equipment {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.equipment img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.equipment-details {
+  flex-grow: 1;
+}
+
+.equipment-details h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.equipment-details p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.location {
+  color: gray;
+}
+
+.add-to-cart {
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart:hover {
+  background-color: #e64a19;
+}
+
+  </style>
+</head>
+<body>
+  <main>
+    <h1 class="category-title">Aerial Work Platforms</h1>
+    <section class="equipment-list">
+      <!-- Equipment Cards -->
+      <div class="equipment">
+        <img src="images/scissor-lift-10-12.jpg" alt="Electric Scissor Lift 10'-12'">
+        <div class="equipment-details">
+          <h2>Electric Scissor Lift, 10' - 12'</h2>
+          <p>$ - / day &nbsp; | &nbsp; $ - / week &nbsp; | &nbsp; $ - / 4-week</p>
+          <p><span class="location">Set location to see prices</span></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="equipment">
+        <img src="images/scissor-lift-13-14.jpg" alt="Electric Scissor Lift 13'-14'">
+        <div class="equipment-details">
+          <h2>Electric Scissor Lift, 13' - 14'</h2>
+          <p>$ - / day &nbsp; | &nbsp; $ - / week &nbsp; | &nbsp; $ - / 4-week</p>
+          <p><span class="location">Set location to see prices</span></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="equipment">
+        <img src="images/scissor-lift-19-micro.jpg" alt="Electric Scissor Lift 19' Micro">
+        <div class="equipment-details">
+          <h2>Electric Scissor Lift, 19' Micro</h2>
+          <p>$ - / day &nbsp; | &nbsp; $ - / week &nbsp; | &nbsp; $ - / 4-week</p>
+          <p><span class="location">Set location to see prices</span></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="equipment">
+        <img src="images/scissor-lift-19-step-up.jpg" alt="Electric Scissor Lift 19' Step-Up">
+        <div class="equipment-details">
+          <h2>Electric Scissor Lift, 19' Micro with Step-Up Platform</h2>
+          <p>$ - / day &nbsp; | &nbsp; $ - / week &nbsp; | &nbsp; $ - / 4-week</p>
+          <p><span class="location">Set location to see prices</span></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="equipment">
+        <img src="images/scissor-lift-20.jpg" alt="Electric Scissor Lift 20'">
+        <div class="equipment-details">
+          <h2>Electric Scissor Lift, 20'</h2>
+          <p>$ - / day &nbsp; | &nbsp; $ - / week &nbsp; | &nbsp; $ - / 4-week</p>
+          <p><span class="location">Set location to see prices</span></p>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

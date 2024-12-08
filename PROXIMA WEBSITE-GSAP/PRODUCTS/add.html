@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 2rem;
+    }
+
+    .image-section img {
+      width: 500px;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .details-section {
+      flex: 1;
+    }
+
+    .details-section h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing {
+      font-size: 1.2rem;
+      color: gray;
+      margin-bottom: 1rem;
+    }
+
+    .pricing span {
+      font-weight: bold;
+      color: #ff5722;
+    }
+
+    .quantity-section {
+      margin: 1rem 0;
+    }
+
+    .quantity-counter {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .quantity-counter button {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background-color: #ff5722;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .quantity-counter button:hover {
+      background-color: #e64a19;
+    }
+
+    .quantity-counter input {
+      width: 60px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .add-to-cart {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+      background-color: #e64a19;
+    }
+
+    .equipment-description {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .image-section img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-section">
+      <img id="equipment-image" src="" alt="Equipment Image">
+    </div>
+    <div class="details-section">
+      <h1 id="equipment-title">Equipment Name</h1>
+      <p class="pricing">
+        <span id="price-day">$/day</span> | 
+        <span id="price-week">$/week</span> | 
+        <span id="price-month">$/4-week</span>
+      </p>
+      <p class="location">📍 Set location to see prices</p>
+      <div class="quantity-section">
+        <label for="quantity">Quantity:</label>
+        <div class="quantity-counter">
+          <button id="decrease">-</button>
+          <input id="quantity" type="number" value="1" min="1">
+          <button id="increase">+</button>
+        </div>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+      <div class="equipment-description" id="equipment-description">
+        Equipment details will go here.
+      </div>
+    </div>
+  </div>
+  <script>
+    const data = {
+      aerial: {
+        equipments: [
+          {
+            name: "Electric Scissor Lift, 10' - 12'",
+            img: '/1.jpg',
+            price: { day: "$50", week: "$300", month: "$1000" },
+            description:
+              "This scissor lift offers a working height of 10 to 12 feet, perfect for tight indoor spaces. It provides safety, stability, and quiet operation for construction, maintenance, or installation tasks."
+          },
+          {
+            name: "Electric Scissor Lift, 13' - 14'",
+            img: '/2.jpg',
+            price: { day: "$60", week: "$350", month: "$1200" },
+            description:
+              "Ideal for reaching heights of 13-14 feet, this scissor lift is designed for smooth operation in confined areas, ensuring safety and efficiency for all indoor projects."
+          },
+          {
+            name: "Electric Scissor Lift, 19' Micro",
+            img: '/3.jpg',
+            price: { day: "$70", week: "$400", month: "$1400" },
+            description:
+              "With a working height of 19 feet, this lift is perfect for tasks requiring extended elevation. It combines stability and easy maneuverability for optimal performance."
+          }
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const equipmentId = parseInt(params.get('id'), 10);
+    const categoryId = params.get('category') || 'aerial';
+
+    const categoryData = data[categoryId];
+    const equipment = categoryData ? categoryData.equipments[equipmentId] : null;
+
+    if (equipment) {
+      document.getElementById('equipment-title').textContent = equipment.name;
+      document.getElementById('equipment-image').src = equipment.img;
+      document.getElementById('price-day').textContent = `${equipment.price.day}/day`;
+      document.getElementById('price-week').textContent = `${equipment.price.week}/week`;
+      document.getElementById('price-month').textContent = `${equipment.price.month}/4-week`;
+      document.getElementById('equipment-description').textContent = equipment.description;
+    } else {
+      document.querySelector('.container').innerHTML =
+        '<p style="text-align:center;padding:2rem;">Equipment not found.</p>';
+    }
+
+    const decreaseBtn = document.getElementById('decrease');
+    const increaseBtn = document.getElementById('increase');
+    const quantityInput = document.getElementById('quantity');
+
+    decreaseBtn.addEventListener('click', () => {
+      const currentValue = parseInt(quantityInput.value, 10) || 1;
+      if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+      }
+    });
+
+    increaseBtn.addEventListener('click', () => {
+      const currentValue = parseInt(quantityInput.value, 10) || 1;
+      quantityInput.value = currentValue + 1;
+    });
+  </script>
+</body>
+</html>

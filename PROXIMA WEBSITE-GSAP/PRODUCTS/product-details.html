@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="bg-gray-800 text-white p-5 text-center">
+    <h1 class="text-3xl font-bold">Product Details</h1>
+  </header>
+
+  <main class="container mx-auto px-4 py-10 text-center">
+    <div id="product-details"></div>
+    <a href="index.html" class="text-blue-500 underline">Back to Products</a>
+  </main>
+
+  <script>
+    // Load product details from localStorage
+    const product = JSON.parse(localStorage.getItem('selectedProduct'));
+
+    // Render product details
+    if (product) {
+      document.getElementById('product-details').innerHTML = `
+        <h2 class="text-2xl font-bold">${product.name}</h2>
+        <p class="text-lg">${product.price}</p>
+        <p class="text-gray-700">${product.description}</p>
+      `;
+    } else {
+      document.getElementById('product-details').innerHTML = `
+        <p>Product not found. Please return to the <a href="index.html" class="text-blue-500 underline">Products Page</a>.</p>
+      `;
+    }
+  </script>
+</body>
+</html>

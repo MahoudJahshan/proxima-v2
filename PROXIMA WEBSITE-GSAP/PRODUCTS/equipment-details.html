@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .image-section img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+
+    .details-section {
+      flex: 1;
+    }
+
+    .details-section h1 {
+      font-size: 2rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing {
+      font-size: 1.2rem;
+      color: gray;
+      margin-bottom: 1rem;
+    }
+
+    .pricing span {
+      font-weight: bold;
+      color: #ff5722;
+    }
+
+    .add-to-cart {
+      background-color: #ff5722;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+
+    .equipment-description {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .equipment-specs {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .equipment-specs h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    .specs-table th,
+    .specs-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .specs-table th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .specs-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .specs-table tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-section">
+      <img id="equipment-image" src="" alt="Equipment Image">
+    </div>
+    <div class="details-section">
+      <h1 id="equipment-title">Equipment Name</h1>
+      <p class="pricing">
+        <span id="price-day">$/day</span> | 
+        <span id="price-week">$/week</span> | 
+        <span id="price-month">$/4-week</span>
+      </p>
+      <button class="add-to-cart">Add to Cart</button>
+      
+      <div class="equipment-description" id="equipment-description">
+        Equipment details will go here.
+      </div>
+
+      <div class="equipment-specs">
+        <h3>Additional Specs</h3>
+        <table class="specs-table" id="specs-table">
+          <thead>
+            <tr>
+              <th>Specification</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      aerial: {
+        equipments: [
+          {
+            name: "Electric Scissor Lift, 10' - 12'",
+            img: '/1.jpg',
+            price: { day: "$50", week: "$300", month: "$1000" },
+            description:
+              "This scissor lift offers a working height of 10 to 12 feet, perfect for tight indoor spaces. It provides safety, stability, and quiet operation for construction, maintenance, or installation tasks.",
+            specs: {
+              "Equipment Make": "MEC",
+              "Model Number": "45-AJ",
+              "Horizontal Reach": ["10 ft", "15 ft", "20 ft"],
+              "serial Number": "43453345-AJ"
+
+            }
+          },
+          {
+            name: "Articulating Boom Lift, 30' - 35'",
+            img: '/2.jpg',
+            price: { day: "$75", week: "$450", month: "$1500" },
+            description:
+              "An articulating boom lift designed for reaching over obstacles. With a working height of 30-35 feet, it's perfect for outdoor construction and maintenance.",
+            specs: {
+              "Equipment Make": "JLG",
+              "Model Number": "E300AJP",
+              "Horizontal Reach": ["20 ft", "25 ft"]
+            }
+          }
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const equipmentId = parseInt(params.get('id'), 10) || 0;
+    const categoryId = params.get('category') || 'aerial';
+
+    const categoryData = data[categoryId];
+    const equipment = categoryData ? categoryData.equipments[equipmentId] : null;
+
+    if (equipment) {
+      document.getElementById('equipment-title').textContent = equipment.name;
+      document.getElementById('equipment-image').src = equipment.img;
+      document.getElementById('price-day').textContent = `${equipment.price.day}/day`;
+      document.getElementById('price-week').textContent = `${equipment.price.week}/week`;
+      document.getElementById('price-month').textContent = `${equipment.price.month}/4-week`;
+      document.getElementById('equipment-description').textContent = equipment.description;
+
+      const specsTableBody = document.getElementById('specs-table').querySelector('tbody');
+      specsTableBody.innerHTML = '';
+      if (equipment.specs) {
+        for (const [key, value] of Object.entries(equipment.specs)) {
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${key}</td><td>${Array.isArray(value) ? value.join(', ') : value}</td>`;
+          specsTableBody.appendChild(row);
+        }
+      }
+    } else {
+      document.querySelector('.container').innerHTML =
+        '<p style="text-align:center;padding:2rem;">Equipment not found.</p>';
+    }
+  </script>
+</body>
+</html>
